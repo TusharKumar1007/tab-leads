@@ -27,6 +27,12 @@ function saveToLocalStorage(lst) {
 
 function saveInput() {
   const link = inputEl.value;
+
+  if (link.trim() === "") {
+    inputEl.setAttribute("placeholder", "Paste Your Link Here");
+    return;
+  }
+
   if (link.trim() !== "") {
     saveLst.push({
       id: saveLst.length === 0 ? 1 : saveLst.length + 1,
@@ -64,7 +70,9 @@ function renderItems(itemsLst) {
   itemsLst.map((item) => {
     listItems += `<li><button class='bin' data-id='${
       item.id
-    }'>🗑️</button><a id='editableLink-${item.id}' href='${item.value}' target='_blank'>${
+    }'>🗑️</button><a id='editableLink-${item.id}' href='${
+      item.value
+    }' target='_blank'>${
       item.customName ? item.customName : item.value
     }</a><button class='edit_text' data-id='${
       item.id
@@ -81,11 +89,9 @@ function renderItems(itemsLst) {
       editItemText(itemId);
     }
   });
-
 }
 
 function deleteItem(id) {
-
   saveLst = saveLst.filter((item) => item.id != id);
   itemsContainer.innerHTML = "";
   saveToLocalStorage(saveLst);
@@ -94,33 +100,33 @@ function deleteItem(id) {
 
 function editItemText(id) {
   // console.log(id);
-  
+
   const anchor = document.getElementById(`editableLink-${id}`);
   if (!anchor) return; // safety check
 
-  const input = document.createElement('input');
-  input.type = 'text';
+  const input = document.createElement("input");
+  input.type = "text";
   input.value = anchor.textContent;
   input.id = `tempInput-${id}`;
-  input.spellcheck=false;
+  input.spellcheck = false;
 
   anchor.replaceWith(input);
   input.focus();
+  input.select();
 
-  input.addEventListener('keypress', function(event) {
+  input.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
-      const newAnchor = document.createElement('a');
-      newAnchor.href = "#";  
+      const newAnchor = document.createElement("a");
+      newAnchor.href = "#";
       newAnchor.id = `editableLink-${id}`;
       newAnchor.textContent = input.value;
       input.replaceWith(newAnchor);
 
-      
-      const item = saveLst.find(item => item.id === id);
+      const item = saveLst.find((item) => item.id === id);
       if (item) {
         item.customName = input.value;
         saveToLocalStorage(saveLst);
-        renderItems(saveLst); 
+        renderItems(saveLst);
       }
     }
   });
@@ -134,11 +140,10 @@ delBtn.addEventListener("click", () => {
   renderItems();
 });
 
-
-
 editBtn.addEventListener("click", () => {
   if (inputEl.value) {
     inputEditEl.classList.remove("hidden");
+    inputEditEl.focus();
   } else {
     inputEl.setAttribute("placeholder", "Add a url here");
   }
