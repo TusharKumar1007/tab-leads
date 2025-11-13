@@ -14,19 +14,31 @@
 - 📁 Persistent Storage: Saved links remain available even after restarting the browser.
 - 🎨 Clean UI: Simple, intuitive, and user-friendly interface.
 - ⚙️ Lightweight: Minimal resource usage and fast performance.
+- 🔗 edit Link.
 
 
 ## 🧩 Installation (Manual)
 
-1. Download the latest release from the Releases page.
+Follow these steps to install the extension manually on major browsers:
+
+### Chrome / Brave / Edge
+1. Download the latest release from the [Releases]([https://github.com/YOUR_GITHUB_REPO/releases](https://github.com/TusharKumar1007/tab-leads/releases)) page.
 2. Unzip the downloaded file.
-3. Open Chrome and go to:
-```bash
-chrome://extensions/
-```
-4. Enable Developer Mode (toggle in the top right corner).
-5. Click Load Unpacked and select the unzipped folder.
-6. The extension icon will appear in your Chrome toolbar — ready to use!
+3. Open your browser and go to the extensions page:
+   - **Chrome / Edge:** `chrome://extensions/`
+   - **Brave:** `brave://extensions/`
+4. Enable **Developer Mode** (toggle in the top right corner).
+5. Click **Load Unpacked** and select the unzipped folder.
+6. The extension icon will appear in your toolbar — ready to use!
+
+### Firefox
+1. Download the latest release from the [Releases]([https://github.com/YOUR_GITHUB_REPO/releases](https://github.com/TusharKumar1007/tab-leads/releases)) page.
+2. Unzip the downloaded file.
+3. Open Firefox and go to the Add-ons page: `about:debugging#/runtime/this-firefox`
+4. Click **Load Temporary Add-on…**
+5. Select the `manifest.json` file inside the unzipped folder.
+6. The extension will be loaded temporarily (it will disappear after restarting Firefox, for permanent installation consider publishing to [addons.mozilla.org](https://addons.mozilla.org/)).
+
 ---
 
 ## 📂 Project Structure
