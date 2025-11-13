@@ -14,6 +14,7 @@
 - 📁 Persistent Storage: Saved links remain available even after restarting the browser.
 - 🎨 Clean UI: Simple, intuitive, and user-friendly interface.
 - ⚙️ Lightweight: Minimal resource usage and fast performance.
+- 🔗 edit Link.
 
 
 ## 🧩 Installation (Manual)
