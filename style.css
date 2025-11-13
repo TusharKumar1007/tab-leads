@@ -1,3 +1,8 @@
+:root{
+  --dark-bg:#0D1117;
+  --light-bg:#FAF0E6;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +12,21 @@ body {
   font-family: "Poppins", sans-serif;
   padding: 20px;
   min-width: 450px;
+  background-color: var(--light-bg);
+}
+
+.bg-mode-btn{
+  outline: none;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  margin-left: 2px;
+  cursor: pointer;
+}
+
+.change-mod{
+  margin-left: 85%;
+  margin-bottom: 10px;
 }
 .input-btn {
   font-family: "Poppins", sans-serif;
@@ -100,6 +120,14 @@ ul {
   background-color: transparent;
   position: absolute;
   right: 10px;
+  cursor: pointer;
+}
+
+.edit_link{
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  right: 40px;
   cursor: pointer;
 }
 
