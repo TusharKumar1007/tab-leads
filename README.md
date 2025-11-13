@@ -5,6 +5,16 @@
 `Designed for developers, students, and professionals who need a quick and efficient way to organize their browsing workflow.`
 
 ---
+
+## Dark Mode Screenshot
+
+![Dark Mode Screenshot](images/Dark.png)
+
+## Light Mode Screenshot
+
+![Dark Mode Screenshot](images/Light.png)
+
+
 ## ⚡ Features
 
 - 💾 Save Input: Manually add custom links or notes.
