@@ -167,3 +167,11 @@ input[type="text"]::placeholder {
   color: #999;
   font-style: italic;
 }
+
+
+.org-btn{
+  background-color: orange;
+}
+.org-btn:hover{
+  background-color: rgb(194, 130, 12);
+}
