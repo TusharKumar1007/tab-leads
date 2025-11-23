@@ -1,13 +1,16 @@
-const inputEl = document.querySelector("#input-el");
 const itemsContainer = document.querySelector(".savedItems");
+const inputEl = document.querySelector("#input-el");
+const inputEditEl = document.querySelector(".input-edit-el");
 const saveBtn = document.querySelector(".save-btn");
 const tabBtn = document.querySelector(".tab-btn");
 const delBtn = document.querySelector(".del-btn");
 const editBtn = document.querySelector(".edit");
-const inputEditEl = document.querySelector(".input-edit-el");
 
-const darkModeArr = ['#0D1117', '#121212', '#2B1E1E', '#000', '#1B263B'];
-const lightModeArr = ['#FAF0E6', '#F0EAD6', '#F5F5DC', '#fff', '#F8E9D2'];
+const saveAllTabBtn = document.querySelector(".save-all-btn");
+const openAllTabBtn = document.querySelector(".open-all-btn");
+
+const darkModeArr = ["#0D1117", "#121212", "#2B1E1E", "#000", "#1B263B"];
+const lightModeArr = ["#FAF0E6", "#F0EAD6", "#F5F5DC", "#fff", "#F8E9D2"];
 
 const root = document.documentElement;
 const lightBtn = document.getElementById("lightModeBtn");
@@ -25,7 +28,6 @@ chrome.storage.local.get(["themeMode", "bgColor"], (result) => {
     document.body.style.backgroundColor = "var(--light-bg)";
   }
 
-
   if (result.themeMode === "light") {
     const index = lightModeArr.indexOf(result.bgColor);
     currentLightIndex = index >= 0 ? index : 0;
@@ -34,7 +36,6 @@ chrome.storage.local.get(["themeMode", "bgColor"], (result) => {
     currentDarkIndex = index >= 0 ? index : 0;
   }
 });
-
 
 function saveThemePreference(mode, color) {
   chrome.storage.local.set({ themeMode: mode, bgColor: color }, () => {
@@ -52,14 +53,12 @@ function applyThemeVariable(mode, color) {
   }
 }
 
-
 function changeLightMode() {
   currentLightIndex = (currentLightIndex + 1) % lightModeArr.length;
   const newColor = lightModeArr[currentLightIndex];
   applyThemeVariable("light", newColor);
   saveThemePreference("light", newColor);
 }
-
 
 function changeDarkMode() {
   currentDarkIndex = (currentDarkIndex + 1) % darkModeArr.length;
@@ -68,12 +67,8 @@ function changeDarkMode() {
   saveThemePreference("dark", newColor);
 }
 
-
 lightBtn.addEventListener("click", changeLightMode);
 darkBtn.addEventListener("click", changeDarkMode);
-
-
-
 
 console.log("Using chrome.storage.local for Chrome Extension data!");
 
@@ -81,14 +76,12 @@ inputEditEl.classList.add("hidden");
 
 let saveLst = [];
 
-
 chrome.storage.local.get("myList", (result) => {
   if (result.myList) {
     saveLst = result.myList;
     renderItems(saveLst);
   }
 });
-
 
 function saveToChromeStorage(lst) {
   chrome.storage.local.set({ myList: lst }, () => {
@@ -126,6 +119,10 @@ tabBtn.addEventListener("click", () => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const activeTab = tabs[0];
     if (activeTab && activeTab.url) {
+
+      if (!activeTab.url || activeTab.title==='New Tab') return;
+      if (saveLst.some(item => item.value === activeTab.url)) return;
+
       saveLst.push({
         id: saveLst.length === 0 ? 1 : saveLst[saveLst.length - 1].id + 1,
         customName: activeTab.title,
@@ -147,8 +144,12 @@ function renderItems(itemsLst) {
         <a id='editableLink-${item.id}' href='${item.value}' target='_blank'>
           ${item.customName ? item.customName : item.value}
         </a>
-        <button class='edit_link' data-id='${item.id}' title='Edit link'>🔗</button>
-        <button class='edit_text' data-id='${item.id}' title='Rename link'>✏️</button>
+        <button class='edit_link' data-id='${
+          item.id
+        }' title='Edit link'>🔗</button>
+        <button class='edit_text' data-id='${
+          item.id
+        }' title='Rename link'>✏️</button>
       </li>`;
   });
   itemsContainer.innerHTML = listItems;
@@ -256,3 +257,37 @@ editBtn.addEventListener("click", () => {
     inputEl.setAttribute("placeholder", "Add a URL here");
   }
 });
+
+function openAllTabs() {
+  chrome.storage.local.get("myList", (result) => {
+    if (result.myList) {
+      saveLst = result.myList;
+
+      saveLst.forEach((item) => {
+        chrome.tabs.create({ url: item.value });
+      });
+    }
+  });
+}
+
+function saveAllTabs() {
+  chrome.tabs.query({}, (tabs) => {
+    tabs.forEach((tab) => {
+
+      if (!tab.url || tab.title==='New Tab') return;
+
+      if (saveLst.some(item => item.value === tab.url)) return;
+      saveLst.push({
+        id: saveLst.length === 0 ? 1 : saveLst[saveLst.length - 1].id + 1,
+        customName: tab.title,
+        value: tab.url,
+      });
+    });
+
+    saveToChromeStorage(saveLst);
+    renderItems(saveLst);
+  });
+}
+
+openAllTabBtn.addEventListener("click", openAllTabs);
+saveAllTabBtn.addEventListener("click", saveAllTabs);
