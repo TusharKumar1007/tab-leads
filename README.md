@@ -25,6 +25,8 @@
 - 🎨 Clean UI: Simple, intuitive, and user-friendly interface.
 - ⚙️ Lightweight: Minimal resource usage and fast performance.
 - 🔗 edit Link.
+- Save all the opened tabs in the current Focused window, If the url is not already saved it will be added or else will be skipped.
+- Open all the Saved tabs, it will open every saved link in a new tab.
 
 
 ## 🧩 Installation (Manual)
