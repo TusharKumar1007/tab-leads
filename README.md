@@ -34,7 +34,7 @@
 Follow these steps to install the extension manually on major browsers:
 
 ### Chrome / Brave / Edge
-1. Download the `tab-leads.zip` from the latest [Releases]([https://github.com/YOUR_GITHUB_REPO/releases](https://github.com/TusharKumar1007/tab-leads/releases)) page.
+1. Download the `tab-leads.zip` from the latest [Releases](https://github.com/TusharKumar1007/tab-leads/releases) page.
 2. Unzip `tab-leads.zip`   into a folder call it `Extentions` .
 3. Open your browser and go to the extensions page:
    - **Chrome / Edge:** `chrome://extensions/`
@@ -45,7 +45,7 @@ Follow these steps to install the extension manually on major browsers:
 ```**step 2 is very important if you don't want to loose your saved links.**```
 
 ### Firefox
-1. Download the latest release from the [Releases]([https://github.com/YOUR_GITHUB_REPO/releases](https://github.com/TusharKumar1007/tab-leads/releases)) page.
+1. Download the latest release from the [Releases](https://github.com/TusharKumar1007/tab-leads/releases) page.
 2. Unzip the downloaded file.
 3. Open Firefox and go to the Add-ons page: `about:debugging#/runtime/this-firefox`
 4. Click **Load Temporary Add-on…**
