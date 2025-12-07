@@ -34,8 +34,8 @@
 Follow these steps to install the extension manually on major browsers:
 
 ### Chrome / Brave / Edge
-1. Download the latest release from the [Releases]([https://github.com/YOUR_GITHUB_REPO/releases](https://github.com/TusharKumar1007/tab-leads/releases)) page.
-2. Unzip the downloaded file into a folder call it ```Extention``` rename the unzip folder ```tab-leads```.
+1. Download the `tab-leads.zip` from the latest [Releases]([https://github.com/YOUR_GITHUB_REPO/releases](https://github.com/TusharKumar1007/tab-leads/releases)) page.
+2. Unzip `tab-leads.zip`   into a folder call it `Extentions` .
 3. Open your browser and go to the extensions page:
    - **Chrome / Edge:** `chrome://extensions/`
    - **Brave:** `brave://extensions/`
