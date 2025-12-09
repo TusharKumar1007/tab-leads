@@ -14,11 +14,20 @@
   </head>
   <body>
     <div class="change-mod">
-      <button class="bg-mode-btn" id="lightModeBtn" title="Cycle Light Mode">🌤️</button>
-      <button class="bg-mode-btn" id="darkModeBtn" title="Cycle Dark Mode">🌙</button>
+      <button class="bg-mode-btn" id="lightModeBtn" title="Cycle Light Mode">
+        🌤️
+      </button>
+      <button class="bg-mode-btn" id="darkModeBtn" title="Cycle Dark Mode">
+        🌙
+      </button>
     </div>
 
-    <input type="text" class="input-edit-el" placeholder="Give name to your link e.g. Youtube" spellcheck="false">
+    <input
+      type="text"
+      class="input-edit-el"
+      placeholder="Give name to your link e.g. Youtube"
+      spellcheck="false"
+    />
     <div class="input-container">
       <input
         type="text"
@@ -31,9 +40,12 @@
       <button class="edit" title="Name your link">✏️</button>
     </div>
     <div class="btn-container">
-
-      <button class="input-btn save-btn">Save Input</button>
-      <button class="input-btn tab-btn">Save Tab</button>
+      <button class="input-btn save-btn" title="saves the input typed">
+        Save Input
+      </button>
+      <button class="input-btn tab-btn" title="saves the current non empty tab">
+        Save Tab
+      </button>
       <!-- <button class="input-btn show-btn" >Show Items</button> -->
       <button class="input-btn del-btn">Delete All</button>
     </div>
@@ -42,8 +54,15 @@
       <button class="input-btn org-btn save-all-btn">Save all tabs</button>
       <button class="input-btn org-btn open-all-btn">Open all tabs</button>
     </div>
-
-    <ul class="savedItems"></ul>
+    <div class="items-container">
+      <input
+        class="searchBox"
+        type="search"
+        placeholder="Type something to search in saved items"
+        spellcheck="false"
+      />
+      <ul class="savedItems"></ul>
+    </div>
 
     <script src="index.js"></script>
   </body>

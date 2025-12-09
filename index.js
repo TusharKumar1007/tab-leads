@@ -5,6 +5,7 @@ const saveBtn = document.querySelector(".save-btn");
 const tabBtn = document.querySelector(".tab-btn");
 const delBtn = document.querySelector(".del-btn");
 const editBtn = document.querySelector(".edit");
+const searchEl = document.querySelector(".searchBox");
 
 const saveAllTabBtn = document.querySelector(".save-all-btn");
 const openAllTabBtn = document.querySelector(".open-all-btn");
@@ -76,6 +77,10 @@ inputEditEl.classList.add("hidden");
 
 let saveLst = [];
 
+// dataFormate=[
+//   {},{}
+// ]
+
 chrome.storage.local.get("myList", (result) => {
   if (result.myList) {
     saveLst = result.myList;
@@ -119,9 +124,8 @@ tabBtn.addEventListener("click", () => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const activeTab = tabs[0];
     if (activeTab && activeTab.url) {
-
-      if (!activeTab.url || activeTab.title==='New Tab') return;
-      if (saveLst.some(item => item.value === activeTab.url)) return;
+      if (!activeTab.url || activeTab.title === "New Tab") return;
+      if (saveLst.some((item) => item.value === activeTab.url)) return;
 
       saveLst.push({
         id: saveLst.length === 0 ? 1 : saveLst[saveLst.length - 1].id + 1,
@@ -173,7 +177,8 @@ function handleItemAction(e) {
 function deleteItem(id) {
   saveLst = saveLst.filter((item) => item.id !== id);
   saveToChromeStorage(saveLst);
-  renderItems(saveLst);
+  // renderItems(saveLst);
+  searchedItems();
 }
 
 function editItemText(id) {
@@ -185,6 +190,7 @@ function editItemText(id) {
   input.value = anchor.textContent.trim();
   input.id = `tempInput-${id}`;
   input.spellcheck = false;
+  input.classList.add("edit-custom-prop-name");
 
   anchor.replaceWith(input);
   input.focus();
@@ -202,7 +208,8 @@ function editItemText(id) {
       if (item) {
         item.customName = input.value.trim();
         saveToChromeStorage(saveLst);
-        renderItems(saveLst);
+        // renderItems(saveLst);
+        searchedItems();
       }
     }
   });
@@ -219,6 +226,7 @@ function editItemLink(id) {
   input.value = item.value.trim();
   input.id = `tempInput-${id}`;
   input.spellcheck = false;
+  input.classList.add("edit-custom-prop-link");
 
   anchor.replaceWith(input);
   input.focus();
@@ -235,7 +243,8 @@ function editItemLink(id) {
       if (item) {
         item.value = input.value.trim();
         saveToChromeStorage(saveLst);
-        renderItems(saveLst);
+        // renderItems(saveLst);
+        searchedItems();
       }
     }
   });
@@ -273,10 +282,9 @@ function openAllTabs() {
 function saveAllTabs() {
   chrome.tabs.query({}, (tabs) => {
     tabs.forEach((tab) => {
+      if (!tab.url || tab.title === "New Tab") return;
 
-      if (!tab.url || tab.title==='New Tab') return;
-
-      if (saveLst.some(item => item.value === tab.url)) return;
+      if (saveLst.some((item) => item.value === tab.url)) return;
       saveLst.push({
         id: saveLst.length === 0 ? 1 : saveLst[saveLst.length - 1].id + 1,
         customName: tab.title,
@@ -288,6 +296,30 @@ function saveAllTabs() {
     renderItems(saveLst);
   });
 }
+
+const searchedItems = function () {
+  const query = searchEl.value;
+  if (query.toLowerCase().trim() === "") {
+    renderItems(saveLst);
+    return;
+  }
+
+  const results = saveLst.filter((item) =>
+    item.customName.toLowerCase().includes(query.toLowerCase().trim())
+  );
+  if (results.length > 0) renderItems(results);
+  else {
+    let notFoundHtml = `
+  <p style="color:red; text-align:center;">
+    Could not find anything like '${query}'
+  </p>
+`;
+
+    itemsContainer.innerHTML = notFoundHtml;
+  }
+};
+
+searchEl.addEventListener("input", searchedItems);
 
 openAllTabBtn.addEventListener("click", openAllTabs);
 saveAllTabBtn.addEventListener("click", saveAllTabs);
