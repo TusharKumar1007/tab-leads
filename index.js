@@ -155,8 +155,8 @@ function renderItems(itemsLst) {
     listItems += `
       <li>
         <button class='bin' data-id='${item.id}' title='Delete'>🗑️</button>
-        <a id='editableLink-${item.id}' href='${item.value}' title='${
-      item.customName ? item.customName : ""
+        <a id='editableLink-${item.id}' class='linkText' href='${item.value}' title='${
+      item.customName.length>40 ? item.customName : ""
     }' target='_blank'>
           ${
             item.customName

@@ -202,3 +202,7 @@ li{
   display: flex;
   align-items: center;
 }
+
+.linkText{
+  font-weight: bold;
+}
