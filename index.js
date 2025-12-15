@@ -77,6 +77,14 @@ inputEditEl.classList.add("hidden");
 
 let saveLst = [];
 
+const focusEl = function () {
+  if (saveLst.length > 5) {
+    searchEl.focus();
+  } else {
+    inputEl.focus();
+  }
+};
+
 // dataFormate=[
 //   {},{}
 // ]
@@ -84,6 +92,8 @@ let saveLst = [];
 chrome.storage.local.get("myList", (result) => {
   if (result.myList) {
     saveLst = result.myList;
+    focusEl();
+
     renderItems(saveLst);
   }
 });
