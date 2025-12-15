@@ -6,6 +6,7 @@
 
 ---
 
+## Recent Update: `Search feature`
 ## Dark Mode Screenshot
 
 ![Dark Mode Screenshot](images/Dark.png)
@@ -58,10 +59,11 @@ Follow these steps to install the extension manually on major browsers:
 ```
 .
 ├── manifest.json          # Extension configuration and permissions
-├── popup.html             # UI layout for popup window
-├── popup.js               # Core logic (save, delete, rename links)
+├── index.html             # UI layout for popup window
+├── index.js               # Core logic (save, delete, rename links)
 ├── style.css              # Custom styles for popup
-├── icons/                 # Extension icons
+├── icon.png               # Extension icons
+├── svg/                   # contains svg icons
 └── README.md              # Documentation (this file)
 ```
 ---
