@@ -155,8 +155,18 @@ function renderItems(itemsLst) {
     listItems += `
       <li>
         <button class='bin' data-id='${item.id}' title='Delete'>🗑️</button>
-        <a id='editableLink-${item.id}' href='${item.value}' target='_blank'>
-          ${item.customName ? item.customName : item.value}
+        <a id='editableLink-${item.id}' href='${item.value}' title='${
+      item.customName ? item.customName : ""
+    }' target='_blank'>
+          ${
+            item.customName
+              ? item.customName.length > 50
+                ? item.customName.split(" ").slice(0, 4).join(" ") + "......."
+                : item.customName
+              : item.value.length > 50
+              ? item.value.slice(0, 42) + "......."
+              : item.value
+          }
         </a>
         <button class='edit_link' data-id='${
           item.id
