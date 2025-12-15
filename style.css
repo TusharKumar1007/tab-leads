@@ -202,3 +202,16 @@ li{
   display: flex;
   align-items: center;
 }
+
+.bin-svg{
+  width: 20px;
+  object-fit: contain;
+}
+.edit_link-svg{
+  width: 20px;
+  object-fit: contain;
+}
+.edit_text-svg{
+  width: 20px;
+  object-fit: contain;
+}
