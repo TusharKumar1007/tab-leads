@@ -154,8 +154,18 @@ function renderItems(itemsLst) {
   itemsLst.forEach((item) => {
     listItems += `
       <li>
+<<<<<<< HEAD
         <button class='bin' data-id='${item.id}' title='Delete'>🗑️</button>
         <a id='editableLink-${item.id}' class='linkText' href='${item.value}' title='${
+=======
+        <button class='bin' data-id='${item.id}' title='Delete'>
+            <img class="bin-svg" data-id='${
+              item.id
+            }' src="./svg/bin.svg" alt="delete tab"/>
+        </button>
+
+       <a id='editableLink-${item.id}' class="linkText" href='${item.value}' title='${
+>>>>>>> svgicons
       item.customName.length>40 ? item.customName : ""
     }' target='_blank'>
           ${
@@ -168,12 +178,19 @@ function renderItems(itemsLst) {
               : item.value
           }
         </a>
-        <button class='edit_link' data-id='${
-          item.id
-        }' title='Edit link'>🔗</button>
-        <button class='edit_text' data-id='${
-          item.id
-        }' title='Rename link'>✏️</button>
+
+        <button class='edit_link' data-id='${item.id}' title='Edit link'>
+            <img class="edit_link-svg" data-id='${
+              item.id
+            }' src="./svg/link.svg" alt="edit tab link"/>
+        </button>
+
+        <button class='edit_text' data-id='${item.id}' title='Rename link'>
+            <img class="edit_text-svg" data-id='${
+              item.id
+            }' src="./svg/edit.svg" alt="edit tab link"/>
+        </button>
+        
       </li>`;
   });
   itemsContainer.innerHTML = listItems;
@@ -182,13 +199,13 @@ function renderItems(itemsLst) {
 }
 
 function handleItemAction(e) {
-  if (e.target.classList.contains("bin")) {
+  if (e.target.classList.contains("bin-svg")) {
     const itemId = parseInt(e.target.dataset.id, 10);
     deleteItem(itemId);
-  } else if (e.target.classList.contains("edit_text")) {
+  } else if (e.target.classList.contains("edit_text-svg")) {
     const itemId = parseInt(e.target.dataset.id, 10);
     editItemText(itemId);
-  } else if (e.target.classList.contains("edit_link")) {
+  } else if (e.target.classList.contains("edit_link-svg")) {
     const itemId = parseInt(e.target.dataset.id, 10);
     editItemLink(itemId);
   }

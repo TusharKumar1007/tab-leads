@@ -1,1 +1,66 @@
+<<<<<<< HEAD
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="64px" height="64px" fill-rule="nonzero"><g fill="#ed1b1b" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(4,4)"><path d="M28,3c-2.209,0 -4,1.791 -4,4v2h-0.40039l-16.59961,2v3h50v-3l-16.59961,-2h-0.40039v-2c0,-2.209 -1.791,-4 -4,-4zM28,7h8v2h-8zM10,16l4,42h36l3.92383,-41zM32,23c1.333,0 2,1 2,1v29h-4v-29c0,0 0.667,-1 2,-1zM18.97656,23.07031c1.33,-0.093 2.06641,0.85938 2.06641,0.85938l1.96484,29.07031h-4.01172l-1.94336,-28.79297c0,0 0.59383,-1.04372 1.92383,-1.13672zM44.97852,23.07031c1.33,0.093 1.92578,1.13672 1.92578,1.13672l-1.94336,28.79297h-4.01172l1.96484,-29.07031c0,0 0.73445,-0.95238 2.06445,-0.85938z"></path></g></g></svg>
+=======
+<?xml version="1.0" ?>
+<!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Home"/>
+<g id="Print"/>
+<g id="Mail"/>
+<g id="Camera"/>
+<g id="Video"/>
+<g id="Film"/>
+<g id="Message"/>
+<g id="Telephone"/>
+<g id="User"/>
+<g id="File"/>
+<g id="Folder"/>
+<g id="Map"/>
+<g id="Download"/>
+<g id="Upload"/>
+<g id="Video_Recorder"/>
+<g id="Schedule"/>
+<g id="Cart"/>
+<g id="Setting"/>
+<g id="Search"/>
+<g id="Pencils"/>
+<g id="Group"/>
+<g id="Record"/>
+<g id="Headphone"/>
+<g id="Music_Player"/>
+<g id="Sound_On"/>
+<g id="Sound_Off"/>
+<g id="Lock"/>
+<g id="Lock_open"/>
+<g id="Love"/>
+<g id="Favorite"/>
+<g id="Film_1_"/>
+<g id="Music"/>
+<g id="Puzzle"/>
+<g id="Turn_Off"/>
+<g id="Book"/>
+<g id="Save"/>
+<g id="Reload"/>
+<g id="Trash">
+<path d="M28,5h-5V4c0-1.7-1.3-3-3-3h-4h-4c-1.7,0-3,1.3-3,3v1H4C3.5,5,3,5.5,3,6s0.5,1,1,1h1v19c0,2.8,2.2,5,5,5h6   h6c2.8,0,5-2.2,5-5V7h1c0.5,0,1-0.5,1-1S28.5,5,28,5z" fill="#FE9803"/>
+<g>
+<path d="M12,11.1c-0.5,0-1,0.5-1,1v12c0,0.6,0.5,1,1,1s1-0.4,1-1v-12C13,11.6,12.5,11.1,12,11.1z" fill="#3F51B5"/>
+<path d="M20,11.1c-0.5,0-1,0.5-1,1v12c0,0.6,0.5,1,1,1s1-0.4,1-1v-12C21,11.6,20.5,11.1,20,11.1z" fill="#3F51B5"/>
+<path d="M28,5h-5V4c0-1.7-1.3-3-3-3h-4h-4c-1.7,0-3,1.3-3,3v1H4C3.5,5,3,5.5,3,6s0.5,1,1,1h12h12c0.5,0,1-0.5,1-1    S28.5,5,28,5z" fill="#3F51B5"/>
+</g>
+</g>
+<g id="Tag"/>
+<g id="Link"/>
+<g id="Like"/>
+<g id="Bad"/>
+<g id="Gallery"/>
+<g id="Add"/>
+<g id="Close"/>
+<g id="Forward"/>
+<g id="Back"/>
+<g id="Buy"/>
+<g id="Mac"/>
+<g id="Laptop"/>
+</svg>
+>>>>>>> svgicons

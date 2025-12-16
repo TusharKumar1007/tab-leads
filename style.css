@@ -203,6 +203,37 @@ li{
   align-items: center;
 }
 
+<<<<<<< HEAD
 .linkText{
   font-weight: bold;
+=======
+.bin-svg{
+  width: 20px;
+  object-fit: contain;
+}
+.edit_link-svg{
+  width: 20px;
+  object-fit: contain;
+}
+.edit_text-svg{
+  width: 20px;
+  object-fit: contain;
+}
+.edit-svg{
+  width: 20px;
+  object-fit: contain;
+}
+#darkModeBtn-svg{
+  width: 20px;
+  object-fit: contain;
+}
+#lightModeBtn-svg{
+  width: 20px;
+  object-fit: contain;
+}
+
+.linkText{
+  font-weight: bold;
+  font-size: 12px;
+>>>>>>> svgicons
 }
