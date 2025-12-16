@@ -40,7 +40,7 @@ chrome.storage.local.get(["themeMode", "bgColor"], (result) => {
 
 function saveThemePreference(mode, color) {
   chrome.storage.local.set({ themeMode: mode, bgColor: color }, () => {
-    console.log("Saved theme:", mode, color);
+    // console.log("Saved theme:", mode, color);
   });
 }
 
@@ -71,11 +71,15 @@ function changeDarkMode() {
 lightBtn.addEventListener("click", changeLightMode);
 darkBtn.addEventListener("click", changeDarkMode);
 
-console.log("Using chrome.storage.local for Chrome Extension data!");
+// console.log("Using chrome.storage.local for Chrome Extension data!");
 
 inputEditEl.classList.add("hidden");
 
 let saveLst = [];
+
+const getNextId = function () {
+  return saveLst.length ? saveLst.at(-1).id + 1 : 1;
+};
 
 const focusEl = function () {
   if (saveLst.length > 5) {
@@ -100,11 +104,15 @@ chrome.storage.local.get("myList", (result) => {
 
 function saveToChromeStorage(lst) {
   chrome.storage.local.set({ myList: lst }, () => {
-    console.log("List saved to chrome.storage.local");
+    // console.log("List saved to chrome.storage.local");
   });
 }
 
 inputEl.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") saveInput();
+});
+
+inputEditEl.addEventListener("keydown", (event) => {
   if (event.key === "Enter") saveInput();
 });
 
@@ -117,7 +125,7 @@ function saveInput() {
   }
 
   saveLst.push({
-    id: saveLst.length === 0 ? 1 : saveLst[saveLst.length - 1].id + 1,
+    id: getNextId(),
     customName: inputEditEl.value.trim(),
     value: link,
   });
@@ -138,7 +146,7 @@ tabBtn.addEventListener("click", () => {
       if (saveLst.some((item) => item.value === activeTab.url)) return;
 
       saveLst.push({
-        id: saveLst.length === 0 ? 1 : saveLst[saveLst.length - 1].id + 1,
+        id: getNextId(),
         customName: activeTab.title,
         value: activeTab.url,
       });
@@ -147,50 +155,94 @@ tabBtn.addEventListener("click", () => {
     }
   });
 });
+itemsContainer.addEventListener("click", handleItemAction);
+
+// function renderItems(itemsLst) {
+//   itemsContainer.innerHTML = "";
+//   let listItems = "";
+//   itemsLst.forEach((item) => {
+//     listItems += `
+//       <li>
+//         <button class='bin' data-id='${item.id}' title='Delete'>
+//             <img class="bin-svg" data-id='${
+//               item.id
+//             }' src="./svg/bin.svg" alt="delete tab"/>
+//         </button>
+
+//        <a id='editableLink-${item.id}' class="linkText" href='${item.value}' title='${
+//       item.customName.length>40 ? item.customName : ""
+//     }' target='_blank'>
+//           ${
+//             item.customName
+//               ? item.customName.length > 50
+//                 ? item.customName.split(" ").slice(0, 4).join(" ") + "......."
+//                 : item.customName
+//               : item.value.length > 50
+//               ? item.value.slice(0, 42) + "......."
+//               : item.value
+//           }
+//         </a>
+
+//         <button class='edit_link' data-id='${item.id}' title='Edit link'>
+//             <img class="edit_link-svg" data-id='${
+//               item.id
+//             }' src="./svg/link.svg" alt="edit tab link"/>
+//         </button>
+
+//         <button class='edit_text' data-id='${item.id}' title='Rename link'>
+//             <img class="edit_text-svg" data-id='${
+//               item.id
+//             }' src="./svg/edit.svg" alt="edit tab link"/>
+//         </button>
+
+//       </li>`;
+//   });
+//   itemsContainer.innerHTML = listItems;
+
+// }
+
+const formatText = function (item) {
+  return item.customName
+    ? item.customName.length > 50
+      ? item.customName.split(" ").slice(0, 4).join(" ") + "......."
+      : item.customName
+    : item.value.length > 50
+    ? item.value.slice(0, 42) + "......."
+    : item.value;
+};
 
 function renderItems(itemsLst) {
   itemsContainer.innerHTML = "";
-  let listItems = "";
+  const fragment = document.createDocumentFragment();
+
   itemsLst.forEach((item) => {
-    listItems += `
-      <li>
-        <button class='bin' data-id='${item.id}' title='Delete'>
-            <img class="bin-svg" data-id='${
-              item.id
-            }' src="./svg/bin.svg" alt="delete tab"/>
-        </button>
+    const li = document.createElement("li");
 
-       <a id='editableLink-${item.id}' class="linkText" href='${item.value}' title='${
-      item.customName.length>40 ? item.customName : ""
-    }' target='_blank'>
-          ${
-            item.customName
-              ? item.customName.length > 50
-                ? item.customName.split(" ").slice(0, 4).join(" ") + "......."
-                : item.customName
-              : item.value.length > 50
-              ? item.value.slice(0, 42) + "......."
-              : item.value
-          }
-        </a>
+    li.innerHTML = `
+      <button class="bin" data-id="${item.id}">
+        <img class="bin-svg" data-id="${item.id}" src="./svg/bin.svg"/>
+      </button>
 
-        <button class='edit_link' data-id='${item.id}' title='Edit link'>
-            <img class="edit_link-svg" data-id='${
-              item.id
-            }' src="./svg/link.svg" alt="edit tab link"/>
-        </button>
+      <a id="editableLink-${item.id}" class="linkText" href="${
+      item.value
+    }" title="${
+      item.customName.length > 40 ? item.customName : ""
+    }" target="_blank">
+        ${formatText(item)}
+      </a>
 
-        <button class='edit_text' data-id='${item.id}' title='Rename link'>
-            <img class="edit_text-svg" data-id='${
-              item.id
-            }' src="./svg/edit.svg" alt="edit tab link"/>
-        </button>
-        
-      </li>`;
+      <button class="edit_link" data-id="${item.id}">
+        <img class="edit_link-svg" data-id="${item.id}" src="./svg/link.svg"/>
+      </button>
+
+      <button class="edit_text" data-id="${item.id}">
+        <img class="edit_text-svg" data-id="${item.id}" src="./svg/edit.svg"/>
+      </button>
+    `;
+    fragment.appendChild(li);
   });
-  itemsContainer.innerHTML = listItems;
 
-  itemsContainer.addEventListener("click", handleItemAction);
+  itemsContainer.appendChild(fragment);
 }
 
 function handleItemAction(e) {
@@ -300,14 +352,14 @@ editBtn.addEventListener("click", () => {
 });
 
 function openAllTabs() {
-  chrome.storage.local.get("myList", (result) => {
-    if (result.myList) {
-      saveLst = result.myList;
+  chrome.tabs.query({}, (tabs) => {
+    const openUrls = new Set(tabs.map((tab) => tab.url).filter(Boolean));
 
-      saveLst.forEach((item) => {
+    saveLst.forEach((item) => {
+      if (!openUrls.has(item.value)) {
         chrome.tabs.create({ url: item.value });
-      });
-    }
+      }
+    });
   });
 }
 
@@ -318,7 +370,7 @@ function saveAllTabs() {
 
       if (saveLst.some((item) => item.value === tab.url)) return;
       saveLst.push({
-        id: saveLst.length === 0 ? 1 : saveLst[saveLst.length - 1].id + 1,
+        id: getNextId(),
         customName: tab.title,
         value: tab.url,
       });
