@@ -231,4 +231,8 @@ li{
 .linkText{
   font-weight: bold;
   font-size: 12px;
+  max-width: 330px;
+   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

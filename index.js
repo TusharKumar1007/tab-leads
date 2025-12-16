@@ -184,7 +184,7 @@ function renderItems(itemsLst) {
     }" title="${
       item.customName.length > 40 ? item.customName : ""
     }" target="_blank">
-        ${formatText(item)}
+        ${item.customName?item.customName:item.value}
       </a>
 
       <button class="edit_link" data-id="${item.id}">
