@@ -203,10 +203,6 @@ li{
   align-items: center;
 }
 
-<<<<<<< HEAD
-.linkText{
-  font-weight: bold;
-=======
 .bin-svg{
   width: 20px;
   object-fit: contain;
@@ -235,5 +231,4 @@ li{
 .linkText{
   font-weight: bold;
   font-size: 12px;
->>>>>>> svgicons
 }

@@ -154,10 +154,6 @@ function renderItems(itemsLst) {
   itemsLst.forEach((item) => {
     listItems += `
       <li>
-<<<<<<< HEAD
-        <button class='bin' data-id='${item.id}' title='Delete'>🗑️</button>
-        <a id='editableLink-${item.id}' class='linkText' href='${item.value}' title='${
-=======
         <button class='bin' data-id='${item.id}' title='Delete'>
             <img class="bin-svg" data-id='${
               item.id
@@ -165,7 +161,6 @@ function renderItems(itemsLst) {
         </button>
 
        <a id='editableLink-${item.id}' class="linkText" href='${item.value}' title='${
->>>>>>> svgicons
       item.customName.length>40 ? item.customName : ""
     }' target='_blank'>
           ${
