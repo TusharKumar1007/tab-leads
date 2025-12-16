@@ -157,50 +157,6 @@ tabBtn.addEventListener("click", () => {
 });
 itemsContainer.addEventListener("click", handleItemAction);
 
-// function renderItems(itemsLst) {
-//   itemsContainer.innerHTML = "";
-//   let listItems = "";
-//   itemsLst.forEach((item) => {
-//     listItems += `
-//       <li>
-//         <button class='bin' data-id='${item.id}' title='Delete'>
-//             <img class="bin-svg" data-id='${
-//               item.id
-//             }' src="./svg/bin.svg" alt="delete tab"/>
-//         </button>
-
-//        <a id='editableLink-${item.id}' class="linkText" href='${item.value}' title='${
-//       item.customName.length>40 ? item.customName : ""
-//     }' target='_blank'>
-//           ${
-//             item.customName
-//               ? item.customName.length > 50
-//                 ? item.customName.split(" ").slice(0, 4).join(" ") + "......."
-//                 : item.customName
-//               : item.value.length > 50
-//               ? item.value.slice(0, 42) + "......."
-//               : item.value
-//           }
-//         </a>
-
-//         <button class='edit_link' data-id='${item.id}' title='Edit link'>
-//             <img class="edit_link-svg" data-id='${
-//               item.id
-//             }' src="./svg/link.svg" alt="edit tab link"/>
-//         </button>
-
-//         <button class='edit_text' data-id='${item.id}' title='Rename link'>
-//             <img class="edit_text-svg" data-id='${
-//               item.id
-//             }' src="./svg/edit.svg" alt="edit tab link"/>
-//         </button>
-
-//       </li>`;
-//   });
-//   itemsContainer.innerHTML = listItems;
-
-// }
-
 const formatText = function (item) {
   return item.customName
     ? item.customName.length > 50
