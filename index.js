@@ -184,7 +184,7 @@ function renderItems(itemsLst) {
     }" title="${
       item.customName.length > 40 ? item.customName : ""
     }" target="_blank">
-        ${item.customName?item.customName:item.value}
+        ${item.customName ? item.customName : item.value}
       </a>
 
       <button class="edit_link" data-id="${item.id}">
@@ -202,28 +202,34 @@ function renderItems(itemsLst) {
 }
 
 function handleItemAction(e) {
-  if (e.target.classList.contains("bin-svg")) {
-    const itemId = parseInt(e.target.dataset.id, 10);
-    deleteItem(itemId);
-  } else if (e.target.classList.contains("edit_text-svg")) {
-    const itemId = parseInt(e.target.dataset.id, 10);
+  const nodeEl = e.target;
+  if (nodeEl.classList.contains("bin-svg")) {
+    const nodeElMainParent = nodeEl.parentNode.parentNode;
+    console.log(nodeElMainParent);
+    const itemId = parseInt(nodeEl.dataset.id, 10);
+    deleteItem(itemId, nodeElMainParent);
+  } else if (nodeEl.classList.contains("edit_text-svg")) {
+    const itemId = parseInt(nodeEl.dataset.id, 10);
     editItemText(itemId);
-  } else if (e.target.classList.contains("edit_link-svg")) {
-    const itemId = parseInt(e.target.dataset.id, 10);
+  } else if (nodeEl.classList.contains("edit_link-svg")) {
+    const itemId = parseInt(nodeEl.dataset.id, 10);
     editItemLink(itemId);
   }
 }
 
-function deleteItem(id) {
+function deleteItem(id, nodeEl) {
+  nodeEl.remove();
   saveLst = saveLst.filter((item) => item.id !== id);
   saveToChromeStorage(saveLst);
   // renderItems(saveLst);
-  searchedItems();
+  // searchedItems();
 }
 
 function editItemText(id) {
   const anchor = document.getElementById(`editableLink-${id}`);
   if (!anchor) return;
+
+  const anchorHref = anchor.getAttribute("href");
 
   const input = document.createElement("input");
   input.type = "text";
@@ -239,9 +245,11 @@ function editItemText(id) {
   input.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
       const newAnchor = document.createElement("a");
-      newAnchor.href = "#";
       newAnchor.id = `editableLink-${id}`;
+      newAnchor.classList = "linkText";
+      newAnchor.href = `${anchorHref}`;
       newAnchor.textContent = input.value;
+      newAnchor.target = "_blank";
       input.replaceWith(newAnchor);
 
       const item = saveLst.find((item) => item.id === id);
@@ -249,7 +257,7 @@ function editItemText(id) {
         item.customName = input.value.trim();
         saveToChromeStorage(saveLst);
         // renderItems(saveLst);
-        searchedItems();
+        // searchedItems();
       }
     }
   });
@@ -258,6 +266,8 @@ function editItemText(id) {
 function editItemLink(id) {
   const anchor = document.getElementById(`editableLink-${id}`);
   if (!anchor) return;
+
+  const anchorText = anchor.textContent;
 
   const item = saveLst.find((item) => item.id === id);
 
@@ -275,16 +285,18 @@ function editItemLink(id) {
   input.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
       const newAnchor = document.createElement("a");
-      newAnchor.href = "#";
       newAnchor.id = `editableLink-${id}`;
-      newAnchor.textContent = input.value;
+      newAnchor.classList = "linkText";
+      newAnchor.href = `${input.value}`;
+      newAnchor.textContent = anchorText;
+      newAnchor.target = "_blank";
       input.replaceWith(newAnchor);
 
       if (item) {
         item.value = input.value.trim();
         saveToChromeStorage(saveLst);
         // renderItems(saveLst);
-        searchedItems();
+        // searchedItems();
       }
     }
   });
