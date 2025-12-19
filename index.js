@@ -175,8 +175,8 @@ function renderItems(itemsLst) {
     const li = document.createElement("li");
 
     li.innerHTML = `
-      <button class="bin" data-id="${item.id}">
-        <img class="bin-svg" data-id="${item.id}" src="./svg/bin.svg"/>
+      <button class="bin" data-id="${item.id}" >
+        <img class="bin-svg" data-id="${item.id}" src="./svg/bin.svg" title="Delete link"/>
       </button>
 
       <a id="editableLink-${item.id}" class="linkText" href="${
@@ -188,11 +188,11 @@ function renderItems(itemsLst) {
       </a>
 
       <button class="edit_link" data-id="${item.id}">
-        <img class="edit_link-svg" data-id="${item.id}" src="./svg/link.svg"/>
+        <img class="edit_link-svg" data-id="${item.id}" src="./svg/link.svg" title="Change Link"/>
       </button>
 
       <button class="edit_text" data-id="${item.id}">
-        <img class="edit_text-svg" data-id="${item.id}" src="./svg/edit.svg"/>
+        <img class="edit_text-svg" data-id="${item.id}" src="./svg/edit.svg" title="Rename your link"/>
       </button>
     `;
     fragment.appendChild(li);
